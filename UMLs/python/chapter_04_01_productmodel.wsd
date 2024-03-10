@@ -1,0 +1,26 @@
+@startuml Class Diagram
+title Product Model
+class Product
+{
+    #fieldAlanı
+    -name:string
+    -price:float
+    -quantity:int
+    --
+    #getBlogu
+    +getName():string
+    +getPrice():float
+    +getQuantity():int
+    --
+    #setBlogu
+    +setName(value:string)
+    +setPrice(value:float)
+    +setQuantity(value:int)
+    --
+    #yapıcıMethod
+    +Product(name:string, price:float, quantity:int)
+    --
+    +getTotalPrice():float
+}
+
+@enduml
