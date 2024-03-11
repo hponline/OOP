@@ -1,4 +1,6 @@
 #include <iostream>
+#include <string>
+
 using std::string;
 
 class Vehicle
@@ -55,22 +57,25 @@ public:
         this -> color = color;
     }
 
-    void start()
+    virtual void start()
     {
-        std::cout << "Vehicle has been started" << std::endl;
+        std::cout << "Vehicle has been started. " << std::endl;
     }
 
-    void stop()
+    virtual void stop()
     {
-        std::cout << "Vehicle has been stoped" << std::endl;
+        std::cout << "Vehicle has been stoped. " << std::endl;
     }
 
-    void drive()
+    virtual void drive()
     {
-        std::cout << "Vehicle is driving" << std::endl;
+        std::cout << "Vehicle is being driven. " << std::endl;
     }
 
-
+    virtual string toString()
+    {
+        return manufacturer + " - " + std::to_string(year) + " - " + color;
+    }
 };
 
 class Car : public Vehicle
@@ -90,6 +95,11 @@ public:
     {
         std::cout << "The Sunroof has been opened." << std::endl;
     }
+
+    void drive() override
+    {
+        std::cout << "The Car manufacturer by " << this->manufacturer << " is being driven." <<std::endl;
+    }
 };
 
 class Bus : public Vehicle
@@ -102,6 +112,11 @@ public:
     void scheduling()
     {
         std::cout << "Scheduled." << std::endl;
+    }
+
+    void drive() override
+    {
+        std::cout << "The Bus manufacturer by " <<this->manufacturer<<" is being driven." <<std::endl;
     }
 };
 
@@ -117,6 +132,11 @@ public:
     {
         std::cout << "getFare() has been called. " <<std::endl;
     }
+
+    void drive() override
+    {
+        std::cout<<"The SchoolBus manufacturer by " << this->manufacturer <<" is being driven."<<std::endl;
+    }
 };
 
 class Truck : public Vehicle
@@ -130,6 +150,11 @@ public:
     {
         std::cout <<"Transport() has been called. " <<std::endl;
     }
+
+    void drive() override
+    {
+        std::cout<<"The Truck manufacturer by " <<this->manufacturer<<" is being driven."<<std::endl;
+    }
 };
 
 int main()
@@ -139,26 +164,47 @@ int main()
 
     Car item1 = Car();
     item1.setManufacturer("Mercedes");
-    std::cout << "Vehicle " << item1.getManufacturer() << std::endl;
+    item1.setYear(2015);
+    item1.setColor("Black");
+    std::cout << "Vehicle " << item1.toString() << std::endl;
     item1.openSunroof();
     
     Car item3 = Car ("Opel",2019,"Purple");
-    std::cout << "Vehicle " << item3.getManufacturer() << std::endl;
+    std::cout << "Vehicle " << item3.toString() << std::endl;
     item3.openSunroof();
 
     Bus item4 = Bus ("Isuzu",2007,"Gray");
-    std::cout << "Vehicle " << item4.getManufacturer() << std::endl;
+    std::cout << "Vehicle " << item4.toString() << std::endl;
     item4.scheduling();
 
-    SchoolBus item5 = SchoolBus ("Okul Tasiti",2005,"Sarı");
-    std::cout << "Vehicle " << item5.getManufacturer() << std::endl;
+    SchoolBus item5 = SchoolBus ("Okul Tasiti",2005,"Mavi");
+    std::cout << "Vehicle " << item5.toString() << std::endl;
     item5.getFare();
     item5.scheduling();
 
-    Truck item6 = Truck ("Kamyon",2004,"Kırmızı");
-    std::cout<<"Vehicle "<<item6.getManufacturer()<<std::endl;
+    Truck item6 = Truck ("Kamyon",2004,"Kirmizi");
+    std::cout << "Vehicle " << item6.toString() << std::endl;
     item6.transport();
 
+
+    item1.drive();
+    item1.stop();
+
+
+    item3.drive();
+    item3.stop();
+
+
+    item4.drive();
+    item4.stop();
+
+    item5.drive();
+    item5.stop();
+
+    item6.drive();
+    item6.stop();
+
+    
     char c = getchar();
     return 0;
 }
